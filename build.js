@@ -47,6 +47,18 @@ function placeholder(text) {
   return `<div class="placeholder">${esc(text)}</div>`;
 }
 
+function val(v) {
+  return v ? esc(v) : '<span class="todo">To add</span>';
+}
+
+// A document is { "title": "Permit", "file": "docs/basement-permit.pdf" } or a link { "title": "...", "url": "https://..." }.
+function docLinks(list) {
+  if (!list || list.length === 0) return '<span class="todo">To add</span>';
+  return list
+    .map((d) => `<a href="${esc(d.url || url(d.file))}" target="_blank" rel="noopener">${esc(d.title || d.file || d.url)}</a>`)
+    .join("<br>");
+}
+
 function gallery(list, label) {
   if (!list || list.length === 0) return placeholder(`${label} photos to add`);
   return `<div class="gallery">${list
@@ -92,6 +104,8 @@ function layout({ title, body, active }) {
   const nav = [
     `<a href="/"${active === "home" ? ' aria-current="page"' : ""}>Home</a>`,
     `<a href="/home-improvements/"${active === "projects" ? ' aria-current="page"' : ""}>Projects</a>`,
+    `<a href="/#systems">Systems</a>`,
+    `<a href="/maintenance/"${active === "maintenance" ? ' aria-current="page"' : ""}>Maintenance</a>`,
   ].join("");
   return `<!DOCTYPE html>
 <html lang="en">
@@ -133,24 +147,81 @@ function projectCard(p) {
 </a>`;
 }
 
+function systemsTable() {
+  const rows = (site.systems || [])
+    .map(
+      (x) => `<tr>
+  <th scope="row">${esc(x.name)}</th>
+  <td data-label="Installed / age">${val(x.installed)}</td>
+  <td data-label="Last service">${val(x.lastService)}</td>
+  <td data-label="Notes">${x.notes ? esc(x.notes) : ""}${x.documents?.length ? `<div class="docs">${docLinks(x.documents)}</div>` : ""}</td>
+</tr>`
+    )
+    .join("\n");
+  return `<table class="systems">
+<thead><tr><th scope="col">System</th><th scope="col">Installed / age</th><th scope="col">Last service</th><th scope="col">Notes</th></tr></thead>
+<tbody>${rows}</tbody>
+</table>`;
+}
+
+function mapEmbed() {
+  if (!site.showMap || !site.address) return "";
+  const q = encodeURIComponent(site.address);
+  return `<div class="map"><iframe title="Map of ${esc(site.address)}" src="https://maps.google.com/maps?q=${q}&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
+}
+
 function homePage() {
   const h = site.home;
   const facts = h.facts
     .map((f) => `<div><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`)
     .join("");
+  const links = [
+    site.zillowUrl ? `<a href="${esc(site.zillowUrl)}" target="_blank" rel="noopener">Zillow listing</a>` : "",
+  ].filter(Boolean).join(" · ");
+  const recent = (site.maintenance || []).slice(-3).reverse();
   const body = `
 <section class="hero">
   ${h.heroPhoto ? `<img src="${esc(url(h.heroPhoto))}" alt="${esc(site.title)}">` : placeholder("House photo to add")}
   <h1>${esc(site.title)}</h1>
+  ${site.address ? `<p class="address">${esc(site.address)}</p>` : ""}
   <p class="tagline">${esc(site.tagline)}</p>
   <dl class="facts">${facts}</dl>
   ${h.intro ? `<div class="intro">${paras(h.intro)}</div>` : ""}
+  ${links ? `<p class="links">${links}</p>` : ""}
 </section>
 <section>
-  <h2>Projects</h2>
+  <h2>Improvements</h2>
   <div class="cards">${projects.map(projectCard).join("\n")}</div>
-</section>`;
+</section>
+<section id="systems">
+  <h2>Systems at a glance</h2>
+  ${systemsTable()}
+</section>
+<section>
+  <h2>Maintenance</h2>
+  ${
+    recent.length
+      ? `<ul class="log">${recent.map(maintenanceItem).join("")}</ul>`
+      : placeholder("Maintenance entries to add")
+  }
+  <p><a href="/maintenance/">Full maintenance record</a></p>
+</section>
+${mapEmbed() ? `<section><h2>Location</h2>${mapEmbed()}</section>` : ""}`;
   return layout({ title: site.title, body, active: "home" });
+}
+
+// A maintenance entry is { "date": "2024-10", "item": "Gutters cleaned", "by": "Self", "notes": "" }.
+function maintenanceItem(m) {
+  return `<li><span class="log-date">${esc(m.date || "")}</span><span class="log-item">${esc(m.item || "")}${m.by ? ` <span class="meta">· ${esc(m.by)}</span>` : ""}${m.notes ? `<br><span class="meta">${esc(m.notes)}</span>` : ""}${m.documents?.length ? `<br>${docLinks(m.documents)}` : ""}</span></li>`;
+}
+
+function maintenancePage() {
+  const list = [...(site.maintenance || [])].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const body = `
+<h1>Maintenance record</h1>
+<p class="meta">Routine upkeep, newest first.</p>
+${list.length ? `<ul class="log">${list.map(maintenanceItem).join("")}</ul>` : placeholder("Maintenance entries to add")}`;
+  return layout({ title: `Maintenance · ${site.title}`, body, active: "maintenance" });
 }
 
 function projectsPage() {
@@ -179,8 +250,14 @@ function projectPage(p, i) {
   const body = `
 <p class="crumbs"><a href="/home-improvements/">Projects</a></p>
 <h1>${esc(p.title)}</h1>
-<p class="meta">${p.date ? esc(p.date) : '<span class="todo">Date to add</span>'}</p>
-${p.summary ? `<div class="summary">${paras(p.summary)}</div>` : `<div class="summary">${placeholder("A few lines about this project to add")}</div>`}
+<dl class="details">
+  <div><dt>Date</dt><dd>${val(p.date)}</dd></div>
+  <div><dt>Done by</dt><dd>${val(p.doneBy)}</dd></div>
+  <div><dt>Permit</dt><dd>${val(p.permit)}</dd></div>
+  <div><dt>Warranty</dt><dd>${val(p.warranty)}</dd></div>
+  <div class="wide"><dt>Work done</dt><dd>${p.summary ? paras(p.summary) : '<span class="todo">To add</span>'}</dd></div>
+  <div class="wide"><dt>Documents</dt><dd>${docLinks(p.documents)}</dd></div>
+</dl>
 ${sections}
 <nav class="pager">
   ${prev ? `<a href="/home-improvements/${esc(prev.slug)}/">&larr; ${esc(prev.title)}</a>` : "<span></span>"}
@@ -215,9 +292,11 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 copyDir(path.join(ROOT, "src"), OUT);
 copyDir(path.join(ROOT, "photos"), path.join(OUT, "photos"));
+copyDir(path.join(ROOT, "docs"), path.join(OUT, "docs"));
 
 write("index.html", homePage());
 write("home/index.html", redirectPage("/"));
+write("maintenance/index.html", maintenancePage());
 write("home-improvements/index.html", projectsPage());
 projects.forEach((p, i) => write(`home-improvements/${p.slug}/index.html`, projectPage(p, i)));
 write(

@@ -1,12 +1,16 @@
 {
   "title": "48 Maplewood Street",
-  "tagline": "A running journal of the projects that have made this house ours.",
+  "tagline": "Improvements, systems and upkeep since we bought the house in 2020.",
   "noindex": true,
   "home": {
     "facts": [
       {
-        "label": "Moved in",
+        "label": "Purchased",
         "value": "July 2020"
+      },
+      {
+        "label": "Sale price",
+        "value": "$555,000"
       },
       {
         "label": "Size",
@@ -19,5 +23,53 @@
     ],
     "intro": "",
     "heroPhoto": "photos/outside-revamp/new-fence-after-1.jpg"
-  }
+  },
+  "address": "48 Maplewood Street, Watertown, MA 02472",
+  "showMap": true,
+  "zillowUrl": "https://www.zillow.com/homes/48-Maplewood-St-.num.48-Watertown%2C-MA-02472_rb/2079421813_zpid/",
+  "systems": [
+    {
+      "name": "Roof",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    },
+    {
+      "name": "Heating",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    },
+    {
+      "name": "Cooling",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    },
+    {
+      "name": "Water heater",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    },
+    {
+      "name": "Electrical panel",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    },
+    {
+      "name": "Windows",
+      "installed": "",
+      "lastService": "",
+      "notes": "",
+      "documents": []
+    }
+  ],
+  "maintenance": []
 }
