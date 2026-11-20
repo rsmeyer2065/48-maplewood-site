@@ -4,7 +4,16 @@
     var range = box.querySelector("input[type=range]");
     var wrap = box.querySelector(".compare-before-wrap");
     var img = wrap.querySelector("img");
+    var after = box.querySelector(".compare-after");
+    function fit() {
+      if (!after.naturalWidth) return;
+      var r = after.naturalWidth / after.naturalHeight;
+      box.style.aspectRatio = String(r);
+      box.style.maxWidth = "min(100%, calc(80vh * " + r + "))";
+      size();
+    }
     function size() { img.style.width = box.clientWidth + "px"; }
+    if (after.complete) fit(); else after.addEventListener("load", fit);
     function move() { wrap.style.width = range.value + "%"; }
     range.addEventListener("input", move);
     window.addEventListener("resize", size);

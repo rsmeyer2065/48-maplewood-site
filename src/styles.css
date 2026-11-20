@@ -64,7 +64,7 @@ h3 { font-size: 1.05rem; font-family: var(--sans); text-transform: uppercase; le
 .todo { font-style: italic; }
 .summary, .notes { max-width: 70ch; }
 
-.compare { position: relative; border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; aspect-ratio: 4 / 3; background: var(--placeholder); }
+.compare { position: relative; border-radius: var(--radius); overflow: hidden; margin: 0 auto 24px; aspect-ratio: 4 / 3; background: var(--placeholder); }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .compare-before-wrap { position: absolute; inset: 0; width: 50%; overflow: hidden; border-right: 2px solid #fff; }
 .compare-before-wrap img { width: auto; height: 100%; max-width: none; }
