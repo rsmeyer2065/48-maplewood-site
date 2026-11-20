@@ -6,8 +6,18 @@
     "summary": "",
     "cover": "",
     "sections": [
-      { "title": "Office", "notes": "", "before": [], "after": [] },
-      { "title": "Main Room", "notes": "", "before": [], "after": [] }
+      {
+        "title": "Office",
+        "notes": "",
+        "before": [],
+        "after": []
+      },
+      {
+        "title": "Main Room",
+        "notes": "",
+        "before": [],
+        "after": []
+      }
     ]
   },
   {
@@ -17,7 +27,12 @@
     "summary": "",
     "cover": "",
     "sections": [
-      { "title": "Kitchen Upgrades", "notes": "", "before": [], "after": [] }
+      {
+        "title": "Kitchen Upgrades",
+        "notes": "",
+        "before": [],
+        "after": []
+      }
     ]
   },
   {
@@ -27,10 +42,35 @@
     "summary": "",
     "cover": "",
     "sections": [
-      { "title": "Bulkhead", "notes": "", "before": [], "after": [] },
-      { "title": "Planters", "notes": "", "before": [], "after": [] },
-      { "title": "Exterior Painting", "notes": "", "before": [], "after": [] },
-      { "title": "New Fence", "notes": "", "before": [], "after": [] }
+      {
+        "title": "Bulkhead",
+        "notes": "",
+        "before": [],
+        "after": []
+      },
+      {
+        "title": "Planters",
+        "notes": "",
+        "before": [],
+        "after": []
+      },
+      {
+        "title": "Exterior Painting",
+        "notes": "",
+        "before": [],
+        "after": []
+      },
+      {
+        "title": "New Fence",
+        "notes": "",
+        "before": [
+          "photos/outside-revamp/new-fence-before-1.jpg"
+        ],
+        "after": [
+          "photos/outside-revamp/new-fence-after-2.jpg",
+          "photos/outside-revamp/new-fence-after-1.jpg"
+        ]
+      }
     ]
   },
   {
@@ -40,7 +80,17 @@
     "summary": "",
     "cover": "",
     "sections": [
-      { "title": "Bathroom Upgrades", "notes": "", "before": [], "after": [] }
+      {
+        "title": "Bathroom Upgrades",
+        "notes": "",
+        "before": [
+          "photos/1st-floor-bathroom-upgrade/before-1.jpg",
+          "photos/1st-floor-bathroom-upgrade/before-2.jpg"
+        ],
+        "after": [
+          "photos/1st-floor-bathroom-upgrade/after-1.jpg"
+        ]
+      }
     ]
   },
   {
@@ -50,7 +100,15 @@
     "summary": "",
     "cover": "",
     "sections": [
-      { "title": "Gym Upgrades", "notes": "", "before": [], "after": [] }
+      {
+        "title": "Gym Upgrades",
+        "notes": "",
+        "before": [],
+        "after": [
+          "photos/gym-upgrade/after-1.jpg",
+          "photos/gym-upgrade/after-2.jpg"
+        ]
+      }
     ]
   }
 ]
