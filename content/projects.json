@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "basement-remodel",
+    "title": "Basement Remodel",
+    "date": "",
+    "summary": "",
+    "cover": "",
+    "sections": [
+      { "title": "Office", "notes": "", "before": [], "after": [] },
+      { "title": "Main Room", "notes": "", "before": [], "after": [] }
+    ]
+  },
+  {
+    "slug": "kitchen-upgrade",
+    "title": "Kitchen Upgrade",
+    "date": "",
+    "summary": "",
+    "cover": "",
+    "sections": [
+      { "title": "Kitchen Upgrades", "notes": "", "before": [], "after": [] }
+    ]
+  },
+  {
+    "slug": "outside-revamp",
+    "title": "Outside Revamp",
+    "date": "",
+    "summary": "",
+    "cover": "",
+    "sections": [
+      { "title": "Bulkhead", "notes": "", "before": [], "after": [] },
+      { "title": "Planters", "notes": "", "before": [], "after": [] },
+      { "title": "Exterior Painting", "notes": "", "before": [], "after": [] },
+      { "title": "New Fence", "notes": "", "before": [], "after": [] }
+    ]
+  },
+  {
+    "slug": "1st-floor-bathroom-upgrade",
+    "title": "1st Floor Bathroom Upgrade",
+    "date": "",
+    "summary": "",
+    "cover": "",
+    "sections": [
+      { "title": "Bathroom Upgrades", "notes": "", "before": [], "after": [] }
+    ]
+  },
+  {
+    "slug": "gym-upgrade",
+    "title": "Gym Upgrade",
+    "date": "",
+    "summary": "",
+    "cover": "",
+    "sections": [
+      { "title": "Gym Upgrades", "notes": "", "before": [], "after": [] }
+    ]
+  }
+]

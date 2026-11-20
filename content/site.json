@@ -1,0 +1,14 @@
+{
+  "title": "48 Maplewood Street",
+  "tagline": "A running journal of the projects that have made this house ours.",
+  "noindex": true,
+  "home": {
+    "facts": [
+      { "label": "Moved in", "value": "July 2020" },
+      { "label": "Size", "value": "1,450 sq ft" },
+      { "label": "Layout", "value": "2 bed / 2 bath" }
+    ],
+    "intro": "",
+    "heroPhoto": ""
+  }
+}

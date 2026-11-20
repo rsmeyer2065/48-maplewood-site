@@ -1,0 +1,7 @@
+services:
+  - type: web
+    runtime: static
+    name: 48-maplewood
+    buildCommand: node build.js
+    staticPublishPath: ./public
+    pullRequestPreviewsEnabled: false
